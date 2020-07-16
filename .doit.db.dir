@@ -39,7 +39,7 @@
 'copy_assets:output/assets/js/bootstrap.min.js', (34816, 449)
 'render_galleries:output/galleries/rss.xml', (35328, 4801)
 'copy_assets:output/assets/js/gallery.js', (40448, 425)
-'sitemap:output/sitemap.xml', (49664, 1397)
+'sitemap:output/sitemap.xml', (49664, 1393)
 '_scan_locs:sitemap', (94720, 559)
 'create_bundles:output/assets/js/all-nocdn.js', (42496, 818)
 'create_bundles', (43520, 56)
