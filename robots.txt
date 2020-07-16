@@ -1,0 +1,4 @@
+Sitemap: https://nicolasfauchereau.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: nicolasfauchereau.github.io
