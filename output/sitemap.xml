@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://nicolasfauchereau.github.io/</loc>
-  <lastmod>2020-07-16T09:55:00Z</lastmod>
+  <lastmod>2020-07-16T10:02:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/archive.html</loc>
@@ -16,6 +16,14 @@
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/</loc>
   <lastmod>2020-07-16T09:54:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicolasfauchereau.github.io/pages/cv/</loc>
+  <lastmod>2020-07-16T10:02:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicolasfauchereau.github.io/pages/home/</loc>
+  <lastmod>2020-07-16T10:02:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/test-notebook/</loc>
