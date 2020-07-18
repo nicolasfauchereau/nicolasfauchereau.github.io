@@ -924,7 +924,15 @@ CODE_COLOR_SCHEME = 'friendly'
 # )
 
 # Show teasers (instead of full posts) in indexes? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
+
+# NOTE 
+
+# in order to select where to stop the teaser, insert 
+# 
+# <!-- TEASER_END --> 
+#
+# in a markdown cell and only the cells (inputs and outputs) above it will be displayed on the website 
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
