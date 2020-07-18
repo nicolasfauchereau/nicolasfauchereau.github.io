@@ -1,4 +1,4 @@
-.. title: Home
+.. title: Welcome to my home page
 .. slug: 
 .. date: 2020-07-16 22:22:07 UTC+12:00
 .. tags: 
@@ -6,8 +6,6 @@
 .. link: 
 .. description: 
 .. type: text
-
-Welcome to my home page ...
 
 My name is Nicolas Fauchereau, I am a climate scientist at `NIWA <http://www.niwa.co.nz>`_ (The National Institute for Water and Atmospheric research) in New Zealand, 
 in the Climate and Environmental Applications group, and based in Hamilton. My primary research interests are about scale interactions in the climate system 
