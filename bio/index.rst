@@ -14,3 +14,11 @@ in the Climate and Environmental Applications group, and based in Hamilton. My p
 I am also exploring the use of Machine Learning approaches for scientific discovery and improving climate forecasting.   
 
 I am a big fan of the `Python programming language <https://www.python.org/>`_ and the `Python Scienific Ecosystem <https://scipy.org/>`_. 
+
+My favorite Python packages are: 
+
+- `Pandas <http://pandas.pydata.org>`_ 
+- `Matplotlib <https://matplotlib.org/>`_
+- `xarray <http://xarray.pydata.org>`_ 
+- `cartopy <https://scitools.org.uk/cartopy/docs/latest/>`_ 
+- `scikit-learn <https://scikit-learn.org/>`_ 
