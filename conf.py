@@ -643,6 +643,8 @@ ATOM_FILENAME_BASE = "feed"
 # If you don't need any of these, just set to []
 REDIRECTIONS = []
 
+# REDIRECTIONS = [("index.html", "/bio/index.html")]
+
 # Presets of commands to execute to deploy. Can be anything, for
 # example, you may use rsync:
 # "rsync -rav --delete output/ joe@my.site:/srv/www/site"
@@ -911,7 +913,7 @@ IMAGE_FOLDERS = {'images': 'images'}
 # This list MAY be incomplete since pygments adds styles every now and then.
 # Check with list(pygments.styles.get_all_styles()) in an interpreter.
 #
-CODE_COLOR_SCHEME = 'monokai'
+CODE_COLOR_SCHEME = 'friendly'
 
 # FAVICONS contains (name, file, size) tuples.
 # Used to create favicon link like this:
