@@ -28,7 +28,8 @@ in the Climate and Environmental Applications group, and bas">
 <!-- Menubar -->
 
 <nav class="navbar navbar-expand-md static-top mb-4
-navbar-dark bg-dark
+navbar-dark
+bg-dark
 "><div class="container">
 <!-- This keeps the margins nice -->
         <a class="navbar-brand" href="../">
@@ -79,8 +80,7 @@ navbar-dark bg-dark
         
 
     </header><div class="e-content entry-content" itemprop="articleBody text">
-    <div>
-<p>My name is Nicolas Fauchereau, I am a climate scientist at <a class="reference external" href="http://www.niwa.co.nz">NIWA</a> (The National Institute for Water and Atmospheric research) in New Zealand,
+    <p>My name is Nicolas Fauchereau, I am a climate scientist at <a class="reference external" href="http://www.niwa.co.nz">NIWA</a> (The National Institute for Water and Atmospheric research) in New Zealand,
 in the Climate and Environmental Applications group, and based in Hamilton. My primary research interests are about scale interactions in the climate system
 (e.g. between intra-seasonal and interannual variability, and synoptic-scale and near-global scales) and climate predictability from sub-seasonal to seasonal scales.</p>
 <p>I am also exploring the use of Machine Learning approaches for scientific discovery and for improving climate forecasting.</p>
@@ -94,7 +94,6 @@ in the Climate and Environmental Applications group, and based in Hamilton. My p
 <li><p><a class="reference external" href="https://scikit-learn.org/">scikit-learn</a></p></li>
 </ul>
 </div>
-    </div>
     
 
 </article><!--End of body content--><footer id="footer"><div class="text-center">
@@ -123,7 +122,7 @@ in the Climate and Environmental Applications group, and based in Hamilton. My p
 </span>
 </p>
 <p>
-  Contents © 2020  Nicolas Fauchereau
+  Contents © 2022  Nicolas Fauchereau
   —
   
   —
@@ -141,9 +140,7 @@ in the Climate and Environmental Applications group, and based in Hamilton. My p
         <script src="../assets/js/all-nocdn.js"></script><script>
     baguetteBox.run('div#content', {
         ignoreClass: 'islink',
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
+        captions: function(element){var i=element.getElementsByTagName('img')[0];return i===undefined?'':i.alt;}});
     </script>
 </body>
 </html>
