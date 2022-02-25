@@ -926,6 +926,7 @@ CODE_COLOR_SCHEME = 'friendly'
 # Show teasers (instead of full posts) in indexes? Defaults to False.
 INDEX_TEASERS = True
 
+
 # NOTE 
 
 # in order to select where to stop the teaser, insert 
@@ -977,7 +978,8 @@ LICENSE = ""
 # (translatable)
 # CONTENT_FOOTER = 'Contents &copy; {date}         <a href="mailto:{email}">{author}</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         {license}'
 
-EXTRA_HEAD_DATA = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">'
+# EXTRA_HEAD_DATA = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">'
+EXTRA_HEAD_DATA = "<style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>"
 
 CONTENT_FOOTER = '''
 <div class="text-center">

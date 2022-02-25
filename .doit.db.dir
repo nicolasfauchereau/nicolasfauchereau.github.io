@@ -22,7 +22,7 @@
 'render_listings:output/listings/index.html', (19968, 1985)
 'copy_assets:output/assets/css/html4css1.css', (233984, 610)
 'copy_assets', (22528, 56)
-'sitemap:output/sitemapindex.xml', (23040, 254)
+'sitemap:output/sitemapindex.xml', (23040, 255)
 'copy_assets:output/assets/xml/atom.xsl', (261632, 599)
 'render_taxonomies:output/rss.xml', (203264, 2022)
 'render_galleries', (24576, 56)
