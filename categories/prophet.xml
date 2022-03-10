@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nicolas Fauchereau (Posts about Prophet)</title><link>https://nicolasfauchereau.github.io/</link><description></description><atom:link href="https://nicolasfauchereau.github.io/categories/prophet.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:Nicolas.Fauchereau@gmail.com"&gt;Nicolas Fauchereau&lt;/a&gt; </copyright><lastBuildDate>Thu, 10 Mar 2022 05:11:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Time-series forecasting</title><link>https://nicolasfauchereau.github.io/posts/time-series-forecasting/</link><dc:creator>Nicolas Fauchereau</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nicolas Fauchereau (Posts about Prophet)</title><link>https://nicolasfauchereau.github.io/</link><description></description><atom:link href="https://nicolasfauchereau.github.io/categories/prophet.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2022 &lt;a href="mailto:Nicolas.Fauchereau@gmail.com"&gt;Nicolas Fauchereau&lt;/a&gt; </copyright><lastBuildDate>Thu, 10 Mar 2022 05:13:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Time-series forecasting</title><link>https://nicolasfauchereau.github.io/posts/time-series-forecasting/</link><dc:creator>Nicolas Fauchereau</dc:creator><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Time series forecasting with &lt;a href="https://facebook.github.io/prophet/"&gt;fbprophet&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; inline
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;fbprophet&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;</description><category>Prophet</category><category>Time-series</category><guid>https://nicolasfauchereau.github.io/posts/time-series-forecasting/</guid><pubDate>Mon, 07 Mar 2022 07:42:30 GMT</pubDate></item></channel></rss>
+&lt;p&gt;Time series forecasting with &lt;a href="https://facebook.github.io/prophet/"&gt;fbprophet&lt;/a&gt;
+&lt;/p&gt;&lt;p&gt;&lt;a href="https://nicolasfauchereau.github.io/posts/time-series-forecasting/"&gt;Read more…&lt;/a&gt; (1 min remaining to read)&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</description><category>Prophet</category><category>Time-series</category><guid>https://nicolasfauchereau.github.io/posts/time-series-forecasting/</guid><pubDate>Mon, 07 Mar 2022 07:42:30 GMT</pubDate></item></channel></rss>
