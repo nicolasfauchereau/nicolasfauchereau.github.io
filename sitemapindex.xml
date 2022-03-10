@@ -11,11 +11,11 @@
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/enso.xml</loc>
-  <lastmod>2022-02-25T08:51:00Z</lastmod>
+  <lastmod>2022-03-07T07:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/jupyter.xml</loc>
-  <lastmod>2022-02-26T03:11:00Z</lastmod>
+  <lastmod>2022-03-07T07:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/machine-learning.xml</loc>
@@ -23,26 +23,34 @@
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/matplotlib.xml</loc>
-  <lastmod>2022-02-25T08:51:00Z</lastmod>
+  <lastmod>2022-03-07T07:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/nikola.xml</loc>
-  <lastmod>2022-02-26T03:11:00Z</lastmod>
+  <lastmod>2022-03-07T07:48:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/notebook.xml</loc>
-  <lastmod>2022-02-26T03:11:00Z</lastmod>
+  <lastmod>2022-03-07T07:48:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://nicolasfauchereau.github.io/categories/prophet.xml</loc>
+  <lastmod>2022-03-10T05:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/categories/seasonal-forecasting.xml</loc>
   <lastmod>2022-02-25T08:51:00Z</lastmod>
  </sitemap>
  <sitemap>
+  <loc>https://nicolasfauchereau.github.io/categories/time-series.xml</loc>
+  <lastmod>2022-03-10T05:11:00Z</lastmod>
+ </sitemap>
+ <sitemap>
   <loc>https://nicolasfauchereau.github.io/rss.xml</loc>
-  <lastmod>2022-02-26T03:11:00Z</lastmod>
+  <lastmod>2022-03-10T05:11:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://nicolasfauchereau.github.io/sitemap.xml</loc>
-  <lastmod>2022-02-26T03:11:00Z</lastmod>
+  <lastmod>2022-03-10T05:11:00Z</lastmod>
  </sitemap>
 </sitemapindex>
