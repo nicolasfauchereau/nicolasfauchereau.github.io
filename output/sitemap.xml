@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/archive.html</loc>
-  <lastmod>2022-03-10T05:13:00Z</lastmod>
+  <lastmod>2022-03-10T08:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/bio/</loc>
@@ -60,6 +60,10 @@
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/time-series/</loc>
   <lastmod>2022-03-07T07:47:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicolasfauchereau.github.io/posts/auckland-cycling-and-weather/</loc>
+  <lastmod>2022-03-10T08:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/building-an-enso-tracker-with-matplotlib/</loc>
