@@ -7,78 +7,74 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://nicolasfauchereau.github.io/</loc>
-  <lastmod>2022-02-26T22:33:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/archive.html</loc>
-  <lastmod>2022-03-10T08:16:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/bio/</loc>
-  <lastmod>2020-07-16T19:45:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/</loc>
-  <lastmod>2022-03-07T07:47:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/cat_research-projects/</loc>
-  <lastmod>2020-07-27T10:05:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/enso/</loc>
-  <lastmod>2020-07-20T05:24:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/jupyter/</loc>
-  <lastmod>2020-07-18T22:44:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/machine-learning/</loc>
-  <lastmod>2020-07-27T07:06:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/matplotlib/</loc>
-  <lastmod>2020-07-20T05:24:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/nikola/</loc>
-  <lastmod>2020-07-18T22:44:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/notebook/</loc>
-  <lastmod>2020-07-18T22:44:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/prophet/</loc>
-  <lastmod>2022-03-07T07:47:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/seasonal-forecasting/</loc>
-  <lastmod>2020-07-27T07:06:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/time-series/</loc>
-  <lastmod>2022-03-07T07:47:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/auckland-cycling-and-weather/</loc>
-  <lastmod>2022-03-10T08:16:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/building-an-enso-tracker-with-matplotlib/</loc>
-  <lastmod>2020-07-20T05:24:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/machine-learning-for-seasonal-climate-forecasting/</loc>
-  <lastmod>2020-07-27T07:06:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/testing-notebooks-with-nikola/</loc>
-  <lastmod>2020-07-18T22:44:00Z</lastmod>
- </url>
- <url>
-  <loc>https://nicolasfauchereau.github.io/posts/time-series-forecasting/</loc>
-  <lastmod>2022-03-07T07:47:00Z</lastmod>
+  <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
 </urlset>
