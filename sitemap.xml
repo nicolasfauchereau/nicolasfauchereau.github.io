@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/archive.html</loc>
-  <lastmod>2022-05-23T21:29:00Z</lastmod>
+  <lastmod>2022-05-23T21:41:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/bio/</loc>
@@ -19,11 +19,7 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/</loc>
-  <lastmod>2022-03-11T01:16:00Z</lastmod>
- </url>
- <url>
-  <loc>https://nicolasfauchereau.github.io/categories/cat_research-projects/</loc>
-  <lastmod>2022-03-11T01:16:00Z</lastmod>
+  <lastmod>2022-05-23T21:29:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/enso/</loc>
@@ -31,10 +27,6 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/jupyter/</loc>
-  <lastmod>2022-03-11T01:16:00Z</lastmod>
- </url>
- <url>
-  <loc>https://nicolasfauchereau.github.io/categories/machine-learning/</loc>
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
@@ -54,10 +46,6 @@
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicolasfauchereau.github.io/categories/seasonal-forecasting/</loc>
-  <lastmod>2022-03-11T01:16:00Z</lastmod>
- </url>
- <url>
   <loc>https://nicolasfauchereau.github.io/categories/time-series/</loc>
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
@@ -70,11 +58,11 @@
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicolasfauchereau.github.io/posts/machine-learning-for-seasonal-climate-forecasting/</loc>
+  <loc>https://nicolasfauchereau.github.io/posts/testing-notebooks-with-nikola/</loc>
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
-  <loc>https://nicolasfauchereau.github.io/posts/testing-notebooks-with-nikola/</loc>
-  <lastmod>2022-03-11T01:16:00Z</lastmod>
+  <loc>https://nicolasfauchereau.github.io/posts/wavelet-analysis-with-python/</loc>
+  <lastmod>2022-05-23T21:41:00Z</lastmod>
  </url>
 </urlset>
