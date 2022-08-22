@@ -5,9 +5,9 @@ STOP_RENDERING = runtime.STOP_RENDERING
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 10
-_modified_time = 1661131061.8191247
+_modified_time = 1661147912.3257034
 _enable_loop = True
-_template_filename = '/home/nicolasf/mambaforge/envs/blog/lib/python3.9/site-packages/nikola/data/themes/bootstrap4/templates/listing.tmpl'
+_template_filename = '/home/nicolasf/mambaforge/envs/blog/lib/python3.7/site-packages/nikola/data/themes/bootstrap4/templates/listing.tmpl'
 _template_uri = 'listing.tmpl'
 _source_encoding = 'utf-8'
 _exports = ['content', 'sourcelink']
@@ -30,19 +30,19 @@ def render_body(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
         __M_locals = __M_dict_builtin(pageargs=pageargs)
-        def sourcelink():
-            return render_sourcelink(context._locals(__M_locals))
         code = context.get('code', UNDEFINED)
         def content():
             return render_content(context._locals(__M_locals))
-        folders = context.get('folders', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        messages = context.get('messages', UNDEFINED)
-        crumbs = context.get('crumbs', UNDEFINED)
         source_link = context.get('source_link', UNDEFINED)
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
+        def sourcelink():
+            return render_sourcelink(context._locals(__M_locals))
         title = context.get('title', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
+        crumbs = context.get('crumbs', UNDEFINED)
         files = context.get('files', UNDEFINED)
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
+        folders = context.get('folders', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer('\n')
@@ -67,13 +67,13 @@ def render_content(context,**pageargs):
         code = context.get('code', UNDEFINED)
         def content():
             return render_content(context)
-        folders = context.get('folders', UNDEFINED)
-        ui = _mako_get_namespace(context, 'ui')
-        messages = context.get('messages', UNDEFINED)
-        crumbs = context.get('crumbs', UNDEFINED)
         source_link = context.get('source_link', UNDEFINED)
+        messages = context.get('messages', UNDEFINED)
         title = context.get('title', UNDEFINED)
+        ui = _mako_get_namespace(context, 'ui')
+        crumbs = context.get('crumbs', UNDEFINED)
         files = context.get('files', UNDEFINED)
+        folders = context.get('folders', UNDEFINED)
         __M_writer = context.writer()
         __M_writer('\n')
         __M_writer(str(ui.breadcrumbs(crumbs)))
@@ -114,9 +114,9 @@ def render_content(context,**pageargs):
 def render_sourcelink(context,**pageargs):
     __M_caller = context.caller_stack._push_frame()
     try:
+        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         def sourcelink():
             return render_sourcelink(context)
-        show_sourcelink = context.get('show_sourcelink', UNDEFINED)
         source_link = context.get('source_link', UNDEFINED)
         ui = _mako_get_namespace(context, 'ui')
         __M_writer = context.writer()
@@ -132,6 +132,6 @@ def render_sourcelink(context,**pageargs):
 
 """
 __M_BEGIN_METADATA
-{"filename": "/home/nicolasf/mambaforge/envs/blog/lib/python3.9/site-packages/nikola/data/themes/bootstrap4/templates/listing.tmpl", "uri": "listing.tmpl", "source_encoding": "utf-8", "line_map": {"23": 3, "29": 0, "47": 2, "48": 3, "53": 24, "58": 30, "64": 4, "78": 4, "79": 5, "80": 5, "81": 6, "82": 7, "83": 8, "84": 9, "85": 9, "86": 9, "87": 9, "88": 9, "89": 11, "90": 12, "91": 12, "92": 12, "93": 12, "94": 12, "95": 14, "96": 16, "97": 17, "98": 17, "99": 17, "100": 18, "101": 19, "102": 19, "103": 19, "104": 19, "105": 19, "106": 21, "107": 22, "108": 22, "114": 26, "123": 26, "124": 27, "125": 28, "126": 28, "127": 28, "133": 127}}
+{"filename": "/home/nicolasf/mambaforge/envs/blog/lib/python3.7/site-packages/nikola/data/themes/bootstrap4/templates/listing.tmpl", "uri": "listing.tmpl", "source_encoding": "utf-8", "line_map": {"23": 3, "29": 0, "47": 2, "48": 3, "53": 24, "58": 30, "64": 4, "78": 4, "79": 5, "80": 5, "81": 6, "82": 7, "83": 8, "84": 9, "85": 9, "86": 9, "87": 9, "88": 9, "89": 11, "90": 12, "91": 12, "92": 12, "93": 12, "94": 12, "95": 14, "96": 16, "97": 17, "98": 17, "99": 17, "100": 18, "101": 19, "102": 19, "103": 19, "104": 19, "105": 19, "106": 21, "107": 22, "108": 22, "114": 26, "123": 26, "124": 27, "125": 28, "126": 28, "127": 28, "133": 127}}
 __M_END_METADATA
 """
