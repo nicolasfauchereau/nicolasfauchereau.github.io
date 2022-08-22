@@ -11,7 +11,7 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/archive.html</loc>
-  <lastmod>2022-05-23T22:20:00Z</lastmod>
+  <lastmod>2022-08-22T01:17:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/bio/</loc>
@@ -19,11 +19,15 @@
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/</loc>
-  <lastmod>2022-05-23T21:29:00Z</lastmod>
+  <lastmod>2022-08-22T00:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/enso/</loc>
   <lastmod>2022-03-11T01:16:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicolasfauchereau.github.io/categories/geospatial/</loc>
+  <lastmod>2022-08-22T00:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/categories/jupyter/</loc>
@@ -46,8 +50,16 @@
   <lastmod>2022-03-11T01:16:00Z</lastmod>
  </url>
  <url>
+  <loc>https://nicolasfauchereau.github.io/categories/pygmt/</loc>
+  <lastmod>2022-08-22T00:18:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://nicolasfauchereau.github.io/categories/time-series/</loc>
   <lastmod>2022-03-11T01:16:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://nicolasfauchereau.github.io/posts/a-first-look-at-pygmt/</loc>
+  <lastmod>2022-08-22T00:18:00Z</lastmod>
  </url>
  <url>
   <loc>https://nicolasfauchereau.github.io/posts/area-weighted-global-temperature-anomalies/</loc>
