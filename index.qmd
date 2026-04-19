@@ -1,21 +1,23 @@
 ---
 title: "Nicolas Fauchereau"
-subtitle: "Principal Scientist & Climate Data Architect"
-image: profile.jpg
+subtitle: "Principal Scientist, Climate & Analytics"
+image: profile.png
+format:
+  html:
+    page-layout: full
 about:
-  template: trestles
+  template: jolla
   image-shape: rounded
   links:
     - icon: github
       text: GitHub
       href: https://github.com/nicolasfauchereau
     - icon: google-scholar
-      text: Scholar
+      text: Google Scholar
       href: https://scholar.google.com/citations?user=Vjqk0XsAAAAJ
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/yourprofile/
     - icon: envelope
       text: Contact
       href: mailto:Nicolas.Fauchereau@earthsciences.nz
+title-block-banner: "images/clouds.jpg"
+title-block-banner-color: "white"
 ---

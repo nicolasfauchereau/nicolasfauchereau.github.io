@@ -1,8 +1,8 @@
 ---
 title: "Nicolas Fauchereau"
-image: profile.jpg
+image: profile.png
 about:
-  template: trestles
+  template: jolla
   links:
     - icon: github
       text: Github

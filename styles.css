@@ -1,1 +1,14 @@
 /* css styles */
+.quarto-about-jolla {
+  margin-top: -2em;
+}
+
+/* Ensure the banner has enough height to be impactful */
+.quarto-title-block.table-quarto-banner {
+  padding-top: 5em;
+  padding-bottom: 5em;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.7); /* Adds a 30% dark tint */
+}
