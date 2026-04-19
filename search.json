@@ -32,7 +32,7 @@
     "href": "posts/2026-04-19-area-weighted-global-temperature-anomalies/area-weighted-global-temperature-anomalies.html#selects-only-complete-years",
     "title": "Area Weighted Global Temperature",
     "section": "selects only complete years",
-    "text": "selects only complete years\n\nncep_temp = ncep_temp.sel(time=slice(None, '2021'))"
+    "text": "selects only complete years\n\nncep_temp = ncep_temp.sel(time=slice(None, '2025'))"
   },
   {
     "objectID": "posts/2026-04-19-area-weighted-global-temperature-anomalies/area-weighted-global-temperature-anomalies.html#levels-for-plotting",
