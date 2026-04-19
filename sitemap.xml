@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nicolasfauchereau.github.io/about.html</loc>
-    <lastmod>2026-04-19T05:12:39.079Z</lastmod>
+    <lastmod>2026-04-19T07:30:21.672Z</lastmod>
   </url>
   <url>
-    <loc>https://nicolasfauchereau.github.io/index.html</loc>
-    <lastmod>2026-04-19T04:50:21.732Z</lastmod>
+    <loc>https://nicolasfauchereau.github.io/blog.html</loc>
+    <lastmod>2026-04-19T05:12:05.008Z</lastmod>
   </url>
   <url>
     <loc>https://nicolasfauchereau.github.io/posts/2026-04-19-area-weighted-global-temperature-anomalies/area-weighted-global-temperature-anomalies.html</loc>
@@ -17,7 +17,7 @@
     <lastmod>2026-04-19T07:15:25.053Z</lastmod>
   </url>
   <url>
-    <loc>https://nicolasfauchereau.github.io/blog.html</loc>
-    <lastmod>2026-04-19T05:12:05.008Z</lastmod>
+    <loc>https://nicolasfauchereau.github.io/index.html</loc>
+    <lastmod>2026-04-19T07:29:29.705Z</lastmod>
   </url>
 </urlset>
