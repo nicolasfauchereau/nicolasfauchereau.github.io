@@ -2,7 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/2026-04-19-area-weighted-global-temperature-anomalies/area-weighted-global-temperature-anomalies.html"
+      "/posts/2026-04-19-area-weighted-global-temperature-anomalies/area-weighted-global-temperature-anomalies.html",
+      "/posts/2026-04-19-wavelet-with-python/wavelet-analysis-with-python.html"
     ]
   }
 ]

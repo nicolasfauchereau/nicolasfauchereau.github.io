@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nicolas Fauchereau">
+<meta name="dcterms.date" content="2026-04-19">
+<meta name="description" content="Example Python code for Wavelet Analysis">
+
+<title>Wavelet Analysis with Python – Nicolas Fauchereau</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7f50520695391b4ff7cc22bed23f4889.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-b82c2aef3f2ca498e6adf88b196d2547.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-7f50520695391b4ff7cc22bed23f4889.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Nicolas Fauchereau</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Wavelet Analysis with Python</h1>
+                  <div>
+        <div class="description">
+          Example Python code for Wavelet Analysis
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Reanalysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Nicolas Fauchereau </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 19, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#imports" id="toc-imports" class="nav-link active" data-scroll-target="#imports">imports</a></li>
+  <li><a href="#load-the-wavelib-module" id="toc-load-the-wavelib-module" class="nav-link" data-scroll-target="#load-the-wavelib-module">load the <code>wavelib</code> module</a></li>
+  <li><a href="#loads-the-data" id="toc-loads-the-data" class="nav-link" data-scroll-target="#loads-the-data">loads the data</a></li>
+  <li><a href="#set-up-some-parameters" id="toc-set-up-some-parameters" class="nav-link" data-scroll-target="#set-up-some-parameters">set up some parameters</a></li>
+  <li><a href="#plot-the-raw-time-series" id="toc-plot-the-raw-time-series" class="nav-link" data-scroll-target="#plot-the-raw-time-series">plot the raw time-series</a></li>
+  <li><a href="#calculate-variance-mean-and-standardize-the-time-series" id="toc-calculate-variance-mean-and-standardize-the-time-series" class="nav-link" data-scroll-target="#calculate-variance-mean-and-standardize-the-time-series">calculate variance, mean and standardize the time-series</a></li>
+  <li><a href="#set-wavelet-parameters" id="toc-set-wavelet-parameters" class="nav-link" data-scroll-target="#set-wavelet-parameters">set wavelet parameters</a></li>
+  <li><a href="#wavelet-transform" id="toc-wavelet-transform" class="nav-link" data-scroll-target="#wavelet-transform">wavelet transform</a></li>
+  <li><a href="#significance-levels" id="toc-significance-levels" class="nav-link" data-scroll-target="#significance-levels">significance levels</a></li>
+  <li><a href="#scale-average-between-2-and-8-years" id="toc-scale-average-between-2-and-8-years" class="nav-link" data-scroll-target="#scale-average-between-2-and-8-years">scale-average between 2 and 8 years</a></li>
+  <li><a href="#bias-rectification" id="toc-bias-rectification" class="nav-link" data-scroll-target="#bias-rectification">Bias rectification</a></li>
+  </ul>
+<div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="wavelet-analysis-with-python.ipynb"><i class="bi bi-file-code"></i>Download the Jupyter notebook</a></li><li><a href="wavelib.py"><i class="bi bi-file-code"></i>Download the wavelib.py module</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<p>This Jupyter notebook implements <a href="http://iprc.soest.hawaii.edu/people/miyama.php">Dr.&nbsp;Toru Miyama</a>’s Python code for univariate Wavelet analysis.</p>
+<p>The following is inspired from his IPython notebook available at:</p>
+<p>https://github.com/tmiyama/WaveletAnalysis/blob/main/wavelet_test_ElNino3_Liu.ipynb</p>
+<p>See also:</p>
+<p>https://github.com/tmiyama/WaveletAnalysis/blob/main/wavelet_test_sine.ipynb</p>
+<p>References:</p>
+<ul>
+<li><p>Liu, Y., X.S. Liang, and R.H. Weisberg, 2007: Rectification of the bias in the wavelet power spectrum. Journal of Atmospheric and Oceanic Technology, 24(12), 2093-2102. http://ocgweb.marine.usf.edu/~liu/wavelet.html</p></li>
+<li><p>Torrence, C., and G. P. Compo, 1998: A practical guide to wavelet analysis. Bull. Amer. Meteor. Soc., 79, 61–78. http://paos.colorado.edu/research/wavelets/</p></li>
+</ul>
+<!-- TEASER_END -->
+<section id="imports" class="level3">
+<h3 class="anchored" data-anchor-id="imports">imports</h3>
+<div id="f64f964c-bc57-4be5-b770-0e0585f7a662" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext autoreload</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>autoreload <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="43857a87-6c75-4b42-a056-e26a6d6e8bbf" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="load-the-wavelib-module" class="level3">
+<h3 class="anchored" data-anchor-id="load-the-wavelib-module">load the <code>wavelib</code> module</h3>
+<div id="8ebbff92-9e84-4fef-be61-a94ad473303c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="5c2e8ac2-deb1-43c4-bd63-edb1cd2322b6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">'.'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="930f34de-f914-489a-9afe-5de3dc264b0c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> wavelib <span class="im">import</span> <span class="op">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="loads-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="loads-the-data">loads the data</h3>
+<div id="e340bbd8-16b9-45f2-88ec-d1413943b137" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.loadtxt(<span class="st">'./sst_nino3.dat'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="97548a80-08dd-4eef-a285-d112b4f03b33" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>(504,)</code></pre>
+</div>
+</div>
+<div id="14019e64-404b-4388-a91d-1fb961dae8b3" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> data.size</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="set-up-some-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-some-parameters">set up some parameters</h3>
+<div id="2244565c-f730-4fa7-8873-2eadb5682ad2" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>t0<span class="op">=</span><span class="dv">1871</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.25</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>units<span class="op">=</span><span class="vs">r'</span><span class="dv">^</span><span class="vs">{</span><span class="er">\</span><span class="vs">circ}C'</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>label<span class="op">=</span><span class="st">'NINO3 SST'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="fcd50e7a-76f9-4ca8-bb88-77d20cf418b6" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> np.arange(<span class="dv">0</span>, N) <span class="op">*</span> dt <span class="op">+</span> t0</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="plot-the-raw-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="plot-the-raw-time-series">plot the raw time-series</h3>
+<div id="61e973ad-10e3-47ac-9d58-fce6d3e034a4" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>f, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax.plot(time,data)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> [<span class="dv">1870</span>,<span class="dv">2000</span>]  <span class="co"># plotting range</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(xlim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wavelet-analysis-with-python_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-variance-mean-and-standardize-the-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-variance-mean-and-standardize-the-time-series">calculate variance, mean and standardize the time-series</h3>
+<div id="f3685e85-c865-461f-a448-e89403c5db4c" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>variance <span class="op">=</span> np.std(data)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mean<span class="op">=</span>np.mean(data)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> (data <span class="op">-</span> np.mean(data))<span class="op">/</span>np.sqrt(variance)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"mean="</span>,mean)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"std="</span>, np.sqrt(variance))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mean= -1.984126984127118e-05
+std= 0.7335991128242201</code></pre>
+</div>
+</div>
+</section>
+<section id="set-wavelet-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="set-wavelet-parameters">set wavelet parameters</h3>
+<div id="e35de61c-8c3c-4d6f-b36e-1879b45fea21" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pad <span class="op">=</span> <span class="dv">1</span>      <span class="co"># pad the time series with zeroes (recommended)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dj <span class="op">=</span> <span class="fl">0.25</span>    <span class="co"># this will do 4 sub-octaves per octave</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>s0 <span class="op">=</span> <span class="fl">2.</span><span class="op">*</span>dt    <span class="co"># this says start at a scale of 6 months</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>j1 <span class="op">=</span> <span class="fl">7.</span><span class="op">/</span>dj    <span class="co"># this says do 7 powers-of-two with dj sub-octaves each</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>lag1 <span class="op">=</span> <span class="fl">0.72</span>  <span class="co"># lag-1 autocorrelation for red noise background</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>mother <span class="op">=</span> <span class="st">'Morlet'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="wavelet-transform" class="level3">
+<h3 class="anchored" data-anchor-id="wavelet-transform">wavelet transform</h3>
+<div id="448dd62c-5dd7-458e-8629-6db87919f7bc" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wave,period,scale,coi <span class="op">=</span> wavelet(data,dt,pad,dj,s0,j1,mother)<span class="op">;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>power <span class="op">=</span> (np.<span class="bu">abs</span>(wave))<span class="op">**</span><span class="dv">2</span>         <span class="co"># compute wavelet power spectrum</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="significance-levels" class="level3">
+<h3 class="anchored" data-anchor-id="significance-levels">significance levels</h3>
+<div id="58478678-f319-4dec-ac56-cf4342f4f668" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>signif,fft_theor <span class="op">=</span> wave_signif(<span class="fl">1.0</span>,dt,scale,<span class="dv">0</span>,lag1,<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">1</span>,mother)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="0b900d2e-9f08-4d0e-8a73-c016b982c8aa" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sig95 <span class="op">=</span> np.dot(signif.reshape(<span class="bu">len</span>(signif),<span class="dv">1</span>),np.ones((<span class="dv">1</span>,N))) <span class="co"># expand signif --&gt; (J+1)x(N) array</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="0419e470-6ffd-464a-9893-e75484bf7192" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sig95 <span class="op">=</span> power <span class="op">/</span> sig95         <span class="co"># where ratio &gt; 1, power is significant</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="3f2d913e-6949-44c7-a5ae-3fb2dcc763ef" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>global_ws <span class="op">=</span> variance<span class="op">*</span>power.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)<span class="op">/</span><span class="bu">float</span>(N)   <span class="co"># time-average over all times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="af490853-31ef-4e82-99a6-2e1820105488" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>dof <span class="op">=</span> N <span class="op">-</span> scale  <span class="co"># the -scale corrects for padding at edges</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="ef8a2189-0072-422b-8d48-00b37cab9d0d" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>global_signif,fft_theor <span class="op">=</span> wave_signif(variance,dt,scale,<span class="dv">1</span>,lag1,<span class="op">-</span><span class="dv">1</span>,dof,mother)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="scale-average-between-2-and-8-years" class="level3">
+<h3 class="anchored" data-anchor-id="scale-average-between-2-and-8-years">scale-average between 2 and 8 years</h3>
+<div id="9e000c4f-e2d7-449b-9879-0d1b87f00f9e" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>avg <span class="op">=</span> (scale <span class="op">&gt;=</span> <span class="dv">2</span>) <span class="op">&amp;</span> (scale <span class="op">&lt;</span> <span class="dv">8</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>Cdelta <span class="op">=</span> <span class="fl">0.776</span><span class="op">;</span>   <span class="co"># this is for the MORLET wavelet</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>scale_avg <span class="op">=</span> np.dot(scale.reshape(<span class="bu">len</span>(scale),<span class="dv">1</span>),np.ones((<span class="dv">1</span>,N))) <span class="co"># expand scale --&gt; (J+1)x(N) array</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>scale_avg <span class="op">=</span> power <span class="op">/</span> scale_avg   <span class="co"># [Eqn(24)]</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>scale_avg <span class="op">=</span> variance<span class="op">*</span>dj<span class="op">*</span>dt<span class="op">/</span>Cdelta<span class="op">*</span><span class="bu">sum</span>(scale_avg[avg,:])   <span class="co"># [Eqn(24)]</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>scaleavg_signif ,fft_theor<span class="op">=</span> wave_signif(variance,dt,scale,<span class="dv">2</span>,lag1,<span class="op">-</span><span class="dv">1</span>,[<span class="dv">2</span>,<span class="fl">7.9</span>],mother)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="6cb96a19-a470-42b2-988e-838452a9a5c9" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>iwave<span class="op">=</span>wavelet_inverse(wave, scale, dt, dj, <span class="st">"Morlet"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"root square mean error"</span>,np.sqrt(np.<span class="bu">sum</span>((data<span class="op">-</span>iwave)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span><span class="bu">float</span>(<span class="bu">len</span>(data)))<span class="op">*</span>np.sqrt(variance),<span class="st">"deg C"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>root square mean error 0.07755811016771953 deg C</code></pre>
+</div>
+</div>
+</section>
+<section id="bias-rectification" class="level3">
+<h3 class="anchored" data-anchor-id="bias-rectification">Bias rectification</h3>
+<p>divides by scales</p>
+<div id="e1c4136c-3f23-4e36-be05-417a794e604c" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  Spectrum</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>powers<span class="op">=</span>np.zeros_like(power)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(scale)):</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    powers[k,:] <span class="op">=</span> power[k,:]<span class="op">/</span>scale[k]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#significance: sig95 is already normalized = 1</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  Spectrum</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>global_wss <span class="op">=</span> global_ws<span class="op">/</span>scale   </span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>global_signifs<span class="op">=</span>global_signif<span class="op">/</span>scale</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co">#  Scale-average between El Nino periods of 2--8 years</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="co">########################</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># No need to change </span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co"># because in Eqn(24) of Torrence and Compo [1998], division by scale has been done.</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>scale_avgs<span class="op">=</span>scale_avg</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>scaleavg_signifs<span class="op">=</span>scaleavg_signif</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="7621813c-4009-4e60-ad6b-8e4e3eaa4711" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#figure size</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig<span class="op">=</span>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">10</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># subplot positions</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>width<span class="op">=</span> <span class="fl">0.65</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>hight <span class="op">=</span> <span class="fl">0.28</span><span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>pos1a <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.75</span>, width, <span class="fl">0.2</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>pos1b <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.37</span>, width, hight]</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>pos1c <span class="op">=</span> [<span class="fl">0.79</span>, <span class="fl">0.37</span>, <span class="fl">0.18</span>, hight]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>pos1d <span class="op">=</span> [<span class="fl">0.1</span>,  <span class="fl">0.07</span>, width, <span class="fl">0.2</span>]</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#---- a) Original signal</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>ax<span class="op">=</span>fig.add_axes(pos1a)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">#original</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>ax.plot(time,data<span class="op">*</span>np.sqrt(variance)<span class="op">+</span>mean,<span class="st">"r-"</span>)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co">#reconstruction</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>ax.plot(time,iwave<span class="op">*</span>np.sqrt(variance)<span class="op">+</span>mean,<span class="st">"k--"</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'NINO3 SST (degC)'</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'a) NINO3 Sea Surface Temperature (seasonal)'</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   b) Wavelet spectrum</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a><span class="co">#--- Contour plot wavelet power spectrum</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>bx<span class="op">=</span>fig.add_axes(pos1b,sharex<span class="op">=</span>ax)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>levels <span class="op">=</span> [<span class="fl">0.0625</span>,<span class="fl">0.125</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">16</span>] </span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>Yticks <span class="op">=</span> <span class="dv">2</span><span class="op">**</span>(np.arange(<span class="bu">int</span>(np.log2(np.<span class="bu">min</span>(period))),<span class="bu">int</span>(np.log2(np.<span class="bu">max</span>(period)))<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>bx.contour(time,np.log2(period),np.log2(powers),np.log2(levels))</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>bx.contourf(time,np.log2(period),np.log2(powers),np.log2(levels), extend<span class="op">=</span><span class="st">'both'</span>, cmap<span class="op">=</span>plt.get_cmap(<span class="st">'rainbow'</span>))</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>bx.set_xlabel(<span class="st">'Time (year)'</span>)</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>bx.set_ylabel(<span class="st">'Period (years)'</span>)</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> ticker</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>ymajorLocator<span class="op">=</span>ticker.FixedLocator(np.log2(Yticks))</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>bx.yaxis.set_major_locator( ymajorLocator )</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>ticks<span class="op">=</span>bx.yaxis.set_ticklabels(Yticks)</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'b) Wavelet Power Spectrum'</span>)</span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% significance contour, levels at -99 (fake) and 1 (95% signif)</span></span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> bx.contour(time,np.log2(period),sig95,[<span class="dv">1</span>])</span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a><span class="co"># cone-of-influence, anything "below" is dubious</span></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>ts <span class="op">=</span> time<span class="op">;</span></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>coi_area <span class="op">=</span> np.concatenate([[np.<span class="bu">max</span>(scale)], coi, [np.<span class="bu">max</span>(scale)],[np.<span class="bu">max</span>(scale)]])</span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>ts_area <span class="op">=</span> np.concatenate([[ts[<span class="dv">0</span>]], ts, [ts[<span class="op">-</span><span class="dv">1</span>]] ,[ts[<span class="dv">0</span>]]])<span class="op">;</span></span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> bx.plot(ts_area,np.log2(coi_area),<span class="st">'k'</span>,linewidth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>F<span class="op">=</span>bx.fill(ts_area,np.log2(coi_area),<span class="st">'k'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>,hatch<span class="op">=</span><span class="st">"x"</span>)</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="co">#   c) Global Wavelet spectrum</span></span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="co">#--- Plot global wavelet spectrum</span></span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a>cx<span class="op">=</span>fig.add_axes(pos1c,sharey<span class="op">=</span>bx)</span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>cx.plot(global_wss,np.log2(period),<span class="st">"r-"</span>)</span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a>cx.plot(global_signifs,np.log2(period),<span class="st">'k--'</span>)</span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>ylim<span class="op">=</span>cx.set_ylim(np.log2([period.<span class="bu">min</span>(),period.<span class="bu">max</span>()]))</span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a>cx.invert_yaxis()</span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'c) Global Wavelet Spectrum'</span>)</span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a>xrangec<span class="op">=</span>cx.set_xlim([<span class="dv">0</span>,<span class="fl">1.25</span><span class="op">*</span>np.<span class="bu">max</span>(global_wss)])</span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a><span class="co">#   d) Global Wavelet spectrum</span></span>
+<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a><span class="co">#########################################</span></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a><span class="co">#--- Plot Scale-averaged spectrum -----------------</span></span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a>dx<span class="op">=</span>fig.add_axes(pos1d,sharex<span class="op">=</span>bx)</span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a>dx.plot(time,scale_avgs,<span class="st">"r-"</span>)</span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a>dx.plot([time[<span class="dv">0</span>],time[<span class="op">-</span><span class="dv">1</span>]],[scaleavg_signifs,scaleavg_signifs],<span class="st">"k--"</span>)</span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a><span class="bu">xrange</span><span class="op">=</span>dx.set_xlim(xlim)</span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a>dx.set_ylabel(<span class="st">'Avg variance (degC$^2$)'</span>)</span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span>plt.title(<span class="st">'d) Scale-average Time Series'</span>)</span>
+<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="wavelet-analysis-with-python_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="994ac75f-d2b7-4903-ab3d-754cade998ba" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>cat .<span class="op">/</span>wavelib.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># wavelet library
+
+def wavelet(Y,dt,pad=0.,dj=0.25,s0=-1,J1=-1,mother="MORLET",param=-1):
+    """
+This function is the translation of wavelet.m by Torrence and Compo
+
+import wave_bases from wave_bases.py
+
+The following is the original comment in wavelet.m
+
+#WAVELET  1D Wavelet transform with optional singificance testing
+%
+%   [WAVE,PERIOD,SCALE,COI] = wavelet(Y,DT,PAD,DJ,S0,J1,MOTHER,PARAM)
+%
+%   Computes the wavelet transform of the vector Y (length N),
+%   with sampling rate DT.
+%
+%   By default, the Morlet wavelet (k0=6) is used.
+%   The wavelet basis is normalized to have total energy=1 at all scales.
+%
+%
+% INPUTS:
+%
+%    Y = the time series of length N.
+%    DT = amount of time between each Y value, i.e. the sampling time.
+%
+% OUTPUTS:
+%
+%    WAVE is the WAVELET transform of Y. This is a complex array
+%    of dimensions (N,J1+1). FLOAT(WAVE) gives the WAVELET amplitude,
+%    ATAN(IMAGINARY(WAVE),FLOAT(WAVE) gives the WAVELET phase.
+%    The WAVELET power spectrum is ABS(WAVE)^2.
+%    Its units are sigma^2 (the time series variance).
+%
+%
+% OPTIONAL INPUTS:
+% 
+% *** Note *** setting any of the following to -1 will cause the default
+%               value to be used.
+%
+%    PAD = if set to 1 (default is 0), pad time series with enough zeroes to get
+%         N up to the next higher power of 2. This prevents wraparound
+%         from the end of the time series to the beginning, and also
+%         speeds up the FFT's used to do the wavelet transform.
+%         This will not eliminate all edge effects (see COI below).
+%
+%    DJ = the spacing between discrete scales. Default is 0.25.
+%         A smaller # will give better scale resolution, but be slower to plot.
+%
+%    S0 = the smallest scale of the wavelet.  Default is 2*DT.
+%
+%    J1 = the # of scales minus one. Scales range from S0 up to S0*2^(J1*DJ),
+%        to give a total of (J1+1) scales. Default is J1 = (LOG2(N DT/S0))/DJ.
+%
+%    MOTHER = the mother wavelet function.
+%             The choices are 'MORLET', 'PAUL', or 'DOG'
+%
+%    PARAM = the mother wavelet parameter.
+%            For 'MORLET' this is k0 (wavenumber), default is 6.
+%            For 'PAUL' this is m (order), default is 4.
+%            For 'DOG' this is m (m-th derivative), default is 2.
+%
+%
+% OPTIONAL OUTPUTS:
+%
+%    PERIOD = the vector of "Fourier" periods (in time units) that corresponds
+%           to the SCALEs.
+%
+%    SCALE = the vector of scale indices, given by S0*2^(j*DJ), j=0...J1
+%            where J1+1 is the total # of scales.
+%
+%    COI = if specified, then return the Cone-of-Influence, which is a vector
+%        of N points that contains the maximum period of useful information
+%        at that particular time.
+%        Periods greater than this are subject to edge effects.
+%        This can be used to plot COI lines on a contour plot by doing:
+%
+%              contour(time,log(period),log(power))
+%              plot(time,log(coi),'k')
+%
+%----------------------------------------------------------------------------
+%   Copyright (C) 1995-2004, Christopher Torrence and Gilbert P. Compo
+%
+%   This software may be used, copied, or redistributed as long as it is not
+%   sold and this copyright notice is reproduced on each copy made. This
+%   routine is provided as is without any express or implied warranties
+%   whatsoever.
+%
+% Notice: Please acknowledge the use of the above software in any publications:
+%    ``Wavelet software was provided by C. Torrence and G. Compo,
+%      and is available at URL: http://paos.colorado.edu/research/wavelets/''.
+%
+% Reference: Torrence, C. and G. P. Compo, 1998: A Practical Guide to
+%            Wavelet Analysis. &lt;I&gt;Bull. Amer. Meteor. Soc.&lt;/I&gt;, 79, 61-78.
+%
+% Please send a copy of such publications to either C. Torrence or G. Compo:
+%  Dr. Christopher Torrence               Dr. Gilbert P. Compo
+%  Research Systems, Inc.                 Climate Diagnostics Center
+%  4990 Pearl East Circle                 325 Broadway R/CDC1
+%  Boulder, CO 80301, USA                 Boulder, CO 80305-3328, USA
+%  E-mail: chris[AT]rsinc[DOT]com         E-mail: compo[AT]colorado[DOT]edu
+%----------------------------------------------------------------------------"""  
+    #modules
+    import numpy as np
+    
+    #set default
+    n1 = len(Y)
+    if (s0 == -1): s0=2.*dt
+    if (dj == -1): dj = 1./4.
+    if (J1 == -1): J1=np.fix((np.log(n1*dt/s0)/np.log(2))/dj)
+    if (mother == -1): mother = 'MORLET'
+    #print "s0=",s0
+    #print "J1=",J1
+
+    #....construct time series to analyze, pad if necessary
+    x = Y - np.mean(Y);
+    if (pad == 1):
+        base2 = np.fix(np.log(n1)/np.log(2) + 0.4999)   # power of 2 nearest to N
+        temp=np.zeros((int(2**(base2+1)-n1),))
+        x=np.concatenate((x,temp))
+    
+    n = len(x)
+
+    #....construct wavenumber array used in transform [Eqn(5)]
+    k = np.arange(1,np.fix(n/2)+1)
+    k = k*(2.*np.pi)/(n*dt)
+    k = np.concatenate((np.zeros((1,)),k, -k[-2::-1]));
+
+    #....compute FFT of the (padded) time series
+    f = np.fft.fft(x)    # [Eqn(3)]
+    
+    #....construct SCALE array &amp; empty PERIOD &amp; WAVE arrays
+    scale=np.array([s0*2**(i*dj) for i in range(0,int(J1)+1)])
+    period = scale.copy()
+    wave = np.zeros((int(J1)+1,n),dtype=complex)  # define the wavelet array  # make it complex
+    # loop through all scales and compute transform
+    for a1 in range(0,int(J1)+1):
+        daughter,fourier_factor,coi,dofmin=wave_bases(mother,k,scale[a1],param)
+        wave[a1,:] = np.fft.ifft(f*daughter)  # wavelet transform[Eqn(4)]
+    period = fourier_factor*scale
+    coi=coi*dt*np.concatenate(([1.E-5],np.arange(1.,(n1+1.)/2.-1),np.flipud(np.arange(1,n1/2.)),[1.E-5])) # COI [Sec.3g]
+    wave = wave[:,:n1]  # get rid of padding before returning
+    return wave,period,scale,coi
+    # end of code
+
+def wave_bases(mother,k,scale,param):
+    """
+    This is translation of wave_bases.m by Torrence and Gilbert P. Compo
+ 
+    The folloing is the original README
+ 
+%    WAVE_BASES  1D Wavelet functions Morlet, Paul, or DOG
+%
+%  [DAUGHTER,FOURIER_FACTOR,COI,DOFMIN] = ...
+%      wave_bases(MOTHER,K,SCALE,PARAM);
+%
+%   Computes the wavelet function as a function of Fourier frequency,
+%   used for the wavelet transform in Fourier space.
+%   (This program is called automatically by WAVELET)
+%
+% INPUTS:
+%
+%    MOTHER = a string, equal to 'MORLET' or 'PAUL' or 'DOG'
+%    K = a vector, the Fourier frequencies at which to calculate the wavelet
+%    SCALE = a number, the wavelet scale
+%    PARAM = the nondimensional parameter for the wavelet function
+%
+% OUTPUTS:
+%
+%    DAUGHTER = a vector, the wavelet function
+%    FOURIER_FACTOR = the ratio of Fourier period to scale
+%    COI = a number, the cone-of-influence size at the scale
+%    DOFMIN = a number, degrees of freedom for each point in the wavelet power
+%             (either 2 for Morlet and Paul, or 1 for the DOG)
+%
+%----------------------------------------------------------------------------
+%   Copyright (C) 1995-1998, Christopher Torrence and Gilbert P. Compo
+%   University of Colorado, Program in Atmospheric and Oceanic Sciences.
+%   This software may be used, copied, or redistributed as long as it is not
+%   sold and this copyright notice is reproduced on each copy made.  This
+%   routine is provided as is without any express or implied warranties
+%   whatsoever.
+%----------------------------------------------------------------------------
+    """
+    #import modules
+    import numpy as np
+
+    #
+    mother = mother.upper()
+    n = len(k)
+    # define Heaviside step function
+    def ksign(x):
+        y=np.zeros_like(x)
+        y[x&gt;0]=1
+        return y
+    #
+    if mother=='MORLET':  #-----------------------------------  Morlet
+        if (param == -1): param = 6.
+        k0 = param
+        expnt = -(scale*k - k0)**2/2. *ksign(k)
+        norm = np.sqrt(scale*k[1])*(np.pi**(-0.25))*np.sqrt(n)    # total energy=N   [Eqn(7)]
+        daughter = norm*np.exp(expnt)
+        daughter = daughter*ksign(k)  # Heaviside step function
+        fourier_factor = (4.*np.pi)/(k0 + np.sqrt(2. + k0**2)) # Scale--&gt;Fourier [Sec.3h]
+        coi = fourier_factor/np.sqrt(2)            # Cone-of-influence [Sec.3g]
+        dofmin = 2.                          # Degrees of freedom
+    elif mother=='PAUL': #--------------------------------  Paul
+        if (param == -1): param = 4.
+        m = param
+        expnt = -(scale*k)*ksign(k)
+        norm = np.sqrt(scale*k[1])*(2.**m/np.sqrt(m*np.prod(np.arange(2,2*m))))*np.sqrt(n)
+        daughter = norm*((scale*k)**m)*np.exp(expnt)
+        daughter = daughter*ksign(k)      # Heaviside step function
+        fourier_factor = 4*np.pi/(2.*m+1.)
+        coi = fourier_factor*np.sqrt(2)
+        dofmin = 2.
+    elif mother=='DOG':  #--------------------------------  DOG
+        if (param == -1): param = 2.
+        m = param
+        expnt = -(scale*k)**2 / 2.0
+        from scipy.special import gamma 
+        norm = np.sqrt(scale*k[1]/gamma(m+0.5))*np.sqrt(n)
+        daughter = -norm*(1j**m)*((scale*k)**m)*np.exp(expnt);
+        fourier_factor = 2.*np.pi*np.sqrt(2./(2.*m+1.))
+        coi = fourier_factor/np.sqrt(2)
+        dofmin = 1.
+    else:
+        raise Exception("Mother must be one of MORLET,PAUL,DOG")
+
+
+    return daughter,fourier_factor,coi,dofmin 
+
+    # end of code
+
+def wave_signif(Y,dt,scale1,sigtest=-1,lag1=-1,siglvl=-1,dof=-1,mother=-1,param=-1):
+    """
+This function is the translation of wave_signif.m by Torrence and Compo
+use scipy function "chi2" instead of  chisquare_inv
+
+The following is the original comment in wave_signif.m
+
+%WAVE_SIGNIF  Significance testing for the 1D Wavelet transform WAVELET
+%
+%   [SIGNIF,FFT_THEOR] = ...
+%      wave_signif(Y,DT,SCALE,SIGTEST,LAG1,SIGLVL,DOF,MOTHER,PARAM)
+%
+% INPUTS:
+%
+%    Y = the time series, or, the VARIANCE of the time series.
+%        (If this is a single number, it is assumed to be the variance...)
+%    DT = amount of time between each Y value, i.e. the sampling time.
+%    SCALE = the vector of scale indices, from previous call to WAVELET.
+%
+%
+% OUTPUTS:
+%
+%    SIGNIF = significance levels as a function of SCALE
+%    FFT_THEOR = output theoretical red-noise spectrum as fn of PERIOD
+%
+%
+% OPTIONAL INPUTS:
+% *** Note *** setting any of the following to -1 will cause the default
+%               value to be used.
+%
+%    SIGTEST = 0, 1, or 2.    If omitted, then assume 0.
+%
+%         If 0 (the default), then just do a regular chi-square test,
+%             i.e. Eqn (18) from Torrence &amp; Compo.
+%         If 1, then do a "time-average" test, i.e. Eqn (23).
+%             In this case, DOF should be set to NA, the number
+%             of local wavelet spectra that were averaged together.
+%             For the Global Wavelet Spectrum, this would be NA=N,
+%             where N is the number of points in your time series.
+%         If 2, then do a "scale-average" test, i.e. Eqns (25)-(28).
+%             In this case, DOF should be set to a
+%             two-element vector [S1,S2], which gives the scale
+%             range that was averaged together.
+%             e.g. if one scale-averaged scales between 2 and 8,
+%             then DOF=[2,8].
+%
+%    LAG1 = LAG 1 Autocorrelation, used for SIGNIF levels. Default is 0.0
+%
+%    SIGLVL = significance level to use. Default is 0.95
+%
+%    DOF = degrees-of-freedom for signif test.
+%         IF SIGTEST=0, then (automatically) DOF = 2 (or 1 for MOTHER='DOG')
+%         IF SIGTEST=1, then DOF = NA, the number of times averaged together.
+%         IF SIGTEST=2, then DOF = [S1,S2], the range of scales averaged.
+%
+%       Note: IF SIGTEST=1, then DOF can be a vector (same length as SCALEs),
+%            in which case NA is assumed to vary with SCALE.
+%            This allows one to average different numbers of times
+%            together at different scales, or to take into account
+%            things like the Cone of Influence.
+%            See discussion following Eqn (23) in Torrence &amp; Compo.
+%
+%
+%----------------------------------------------------------------------------
+%   Copyright (C) 1995-1998, Christopher Torrence and Gilbert P. Compo
+%   University of Colorado, Program in Atmospheric and Oceanic Sciences.
+%   This software may be used, copied, or redistributed as long as it is not
+%   sold and this copyright notice is reproduced on each copy made.  This
+%   routine is provided as is without any express or implied warranties
+%   whatsoever.
+%----------------------------------------------------------------------------
+    """
+    from scipy.stats import chi2
+    import numpy as np
+
+    try:
+        n1=len(Y)
+    except:
+        n1=1
+    J1 = len(scale1) - 1
+    scale = scale1
+    s0 = np.min(scale)
+    dj = np.log(scale[1]/scale[0])/np.log(2.)
+    
+
+    if (n1 == 1):
+        variance = Y
+    else:
+        variance = np.std(Y)**2
+
+    if (sigtest == -1): sigtest = 0
+    if (lag1 == -1): lag1 = 0.0
+    if (siglvl == -1): siglvl = 0.95
+    if (mother == -1): mother = 'MORLET'
+
+    mother = mother.upper()
+
+    # get the appropriate parameters [see Table(2)]
+    if (mother=='MORLET'):  #----------------------------------  Morlet
+        if (param == -1): param = 6.
+        k0 = param
+        fourier_factor = (4.*np.pi)/(k0 + np.sqrt(2. + k0**2)) # Scale--&gt;Fourier [Sec.3h]
+        empir = [2.,-1,-1,-1]
+        if (k0 == 6): empir[1:4]=[0.776,2.32,0.60]    
+    elif (mother=='PAUL'):  #--------------------------------  Paul
+        if (param == -1): param = 4.
+        m = param
+        fourier_factor = 4.*np.pi/(2.*m+1.)
+        empir = [2.,-1,-1,-1]
+        if (m == 4): empir[1:4]=[1.132,1.17,1.5] 
+    elif (mother=='DOG'):  #---------------------------------  DOG
+        if (param == -1): param = 2.
+        m = param
+        fourier_factor = 2.*np.pi*np.sqrt(2./(2.*m+1.))
+        empir = [1.,-1,-1,-1]
+        if (m == 2): empir[1:4] = [3.541,1.43,1.4]
+        if (m == 6): empir[1:4] = [1.966,1.37,0.97]
+    else:
+        raise Exception("Mother must be one of MORLET,PAUL,DOG")
+
+    period = scale*fourier_factor
+    dofmin = empir[0]     # Degrees of freedom with no smoothing
+    Cdelta = empir[1]     # reconstruction factor
+    gamma_fac = empir[2]  # time-decorrelation factor
+    dj0 = empir[3]        # scale-decorrelation factor
+
+    freq = dt / period   # normalized frequency
+    fft_theor = (1.-lag1**2) / (1.-2.*lag1*np.cos(freq*2.*np.pi)+lag1**2)  # [Eqn(16)]
+    fft_theor = variance*fft_theor  # include time-series variance
+    signif = fft_theor
+    try:
+        test=len(dof)
+    except:
+        if (dof == -1):
+            dof = dofmin
+        else:
+            pass
+    #
+    if (sigtest == 0):    # no smoothing, DOF=dofmin [Sec.4]
+        dof = dofmin
+        chisquare = chi2.ppf(siglvl,dof)/dof
+        signif = fft_theor*chisquare   # [Eqn(18)]
+    elif (sigtest == 1):  # time-averaged significance
+        try: 
+            test=len(dof)
+        except:
+            dof=np.zeros((J1+1,))+dof
+        truncate = dof &lt; 1
+        dof[truncate] = 1.
+        dof = dofmin*np.sqrt(1. + (dof*dt/gamma_fac / scale)**2 )   # [Eqn(23)]
+        truncate = dof &lt; dofmin
+        dof[truncate] = dofmin   # minimum DOF is dofmin
+        for a1 in range(J1+1):
+            chisquare = chi2.ppf(siglvl,dof[a1])/dof[a1]
+            signif[a1] = fft_theor[a1]*chisquare
+    elif (sigtest == 2):  # time-averaged significance
+        if not (len(dof) == 2):
+            raise Exception("DOF must be set to [S1,S2], the range of scale-averages'")
+        if (Cdelta == -1):
+            raise Exception('Cdelta &amp; dj0 not defined for '+mother+' with param = '+str(param))
+        s1 = dof[0];
+        s2 = dof[1];
+        avg = (scale &gt;= s1) &amp; (scale &lt;= s2)  # scales between S1 &amp; S2
+        navg=np.sum(avg)
+        if navg==0:
+            raise Exception('No valid scales between '+str(s1)+' and '+str(s2))
+        Savg = 1./np.sum(1 / scale[avg])    # [Eqn(25)]
+        Smid = np.exp((np.log(s1)+np.log(s2))/2.)     # power-of-two midpoint
+        dof = (dofmin*navg*Savg/Smid)*np.sqrt(1. + (navg*dj/dj0)**2)  # [Eqn(28)]
+        fft_theor = Savg*np.sum(fft_theor[avg] / scale[avg])  # [Eqn(27)]#
+        chisquare = chi2.ppf(siglvl,dof)/dof
+        signif = (dj*dt/Cdelta/Savg)*fft_theor*chisquare    # [Eqn(26)]
+    else:
+        raise Exception('sigtest must be either 0, 1, or 2')
+
+    return signif,fft_theor
+
+# end of code
+
+def wavelet_inverse(wave, scale, dt, dj=0.25, mother="MORLET",param=-1):
+    """Inverse continuous wavelet transform
+    Torrence and Compo (1998), eq. (11)
+
+    INPUTS
+        waves (array like):
+          WAVE is the WAVELET transform. This is a complex array.
+          
+        scale (array like):
+           the vector of scale indices 
+        dt (float) :
+            amount of time between each original value, i.e. the sampling time.
+        dj (float, optional) :
+            the spacing between discrete scales. Default is 0.25.
+           A smaller # will give better scale resolution, but be slower to plot.
+        mother (string, optional) :
+            the mother wavelet function.
+             The choices are 'MORLET', 'PAUL', or 'DOG'
+         PARAM = the mother wavelet parameter.
+            For 'MORLET' this is k0 (wavenumber), default is 6.
+            For 'PAUL' this is m (order), default is 4.
+            For 'DOG' this is m (m-th derivative), default is 2.    
+
+    OUTPUTS
+        iwave (array like) :
+            Inverse wavelet transform.
+    """
+    import numpy as np
+    
+    j1, n = wave.shape
+    J1 = len(scale)
+    if not j1 == J1:
+        print(j1,n,J1)
+        raise Exception("Input array are inconsistent")
+    sj = np.dot(scale.reshape(len(scale),1),np.ones((1,n)))
+    #
+    mother = mother.upper()
+    
+    # psi0 comes from Table 1,2 Torrence and Compo (1998)
+    # Cdelta comes from Table 2 Torrence and Compo (1998)
+    if mother=='MORLET':  #-----------------------------------  Morlet
+        if (param == -1): param = 6.
+        psi0=np.pi**(-0.25)
+        if param==6.:
+            Cdelta = 0.776
+    elif mother=='PAUL': #--------------------------------  Paul
+        if (param == -1): param = 4.
+        m = param   
+        psi0=np.real(2.**m*1j**m*np.prod(np.arange(2, m + 1))/np.sqrt(np.pi*np.prod(np.arange(2,2*m+1)))*(1**(-(m+1))))
+        if m==4.:
+           Cdelta = 1.132 
+    elif mother=='DOG':  #--------------------------------  DOG
+        if (param == -1): param = 2.
+        m = param
+        from scipy.special import gamma 
+        from numpy.lib.polynomial import polyval
+        from scipy.special.orthogonal import hermitenorm
+        p = hermitenorm(m)
+        psi0=(-1)**(m+1)/np.sqrt(gamma(m+0.5))*polyval(p, 0)
+        print(psi0)
+        if m==2.:
+            Cdelta=3.541
+        if m==6.:
+            Cdelta=1.966
+    else:
+        raise Exception("Mother must be one of MORLET,PAUL,DOG")
+    
+    #eq. (11) in Torrence and Compo (1998)
+    iwave = dj * np.sqrt(dt) / Cdelta /psi0 * (np.real(wave) / sj**0.5).sum(axis=0) 
+    return iwave
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nicolasfauchereau\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
